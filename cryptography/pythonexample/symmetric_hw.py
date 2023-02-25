@@ -30,8 +30,22 @@ iv = os.urandom(16)
 mytext = b"Welcome to Cloud Security 2023 Spring"
 
 # Complete the following code to complete the CBC mode of operation in AES
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv))
+encryptor = cipher.encryptor()
+ct = encryptor.update(mytext) + encryptor.finalize()
+decryptor = cipher.decryptor()
+decryptor.update(ct) + decryptor.finalize()
 
 
 ### Problem 2: Use AES CTR Mode to decrypt the given cipher test with provided key and iv. ###
+
+
+# Instantiate a crypto object first for encryption
+encrypto = AES.new(key, AES.MODE_CTR, counter=lambda: iv)
+encrypted = encrypto.encrypt("asdk")
+
+# Instantiate a new crypto object for decryption
+decrypto = AES.new(key, AES.MODE_CTR, counter=lambda: iv)
+print decrypto.decrypt(encrypted)
 
 
